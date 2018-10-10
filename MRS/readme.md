@@ -1,0 +1,1 @@
+This project contains the sources of and is the common base for both SWC and STQM.
