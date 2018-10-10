@@ -11,15 +11,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import ch.fhnw.swc.mrs.model.*;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 //import org.apache.commons.csv.CSVParser;
 
 import ch.fhnw.swc.mrs.api.MRSServices;
-import ch.fhnw.swc.mrs.model.Movie;
-import ch.fhnw.swc.mrs.model.PriceCategory;
-import ch.fhnw.swc.mrs.model.Rental;
-import ch.fhnw.swc.mrs.model.User;
 
 /**
  * A simple implementation of the MRS Services.
@@ -128,17 +125,27 @@ public class SimpleMRSServices implements MRSServices {
 
     @Override
     public boolean createRental(UUID userId, UUID movieId, LocalDate d) {
+
         User u = users.get(userId);
         Movie m = movies.get(movieId);
-        
+
         if (u != null && m != null && !m.isRented() && !d.isAfter(LocalDate.now())) {
+
             Rental r = new Rental(u, m, d);
             UUID id = UUID.randomUUID();
             r.setId(id);
             rentalList.put(id, r);
+            Bill b = new Bill(u.getFirstName(), u.getName(), u.getRentals());
+            System.out.println(b.print());
             return true;
+
         }
+
+
         return false;
+
+
+
     }
 
     @Override
