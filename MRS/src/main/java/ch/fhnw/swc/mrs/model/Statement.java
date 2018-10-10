@@ -25,16 +25,19 @@ public abstract class Statement {
     
     /** @return A list of rentals to be used to print a statement. */
     public List<Rental> getRentals() {
+
         return rentals;
     }
     
     /** @return The first name of the client for whom the statement is created. */
     public String getFirstName() {
+
         return firstName;
     }
     
     /** @return The family name of the client for whom the statement is created. */
     public String getLastName() {
+
         return lastName;
     }
 

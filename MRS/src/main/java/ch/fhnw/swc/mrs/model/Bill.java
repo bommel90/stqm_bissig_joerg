@@ -11,6 +11,7 @@ public class Bill extends Statement {
      * @param rentals a list of rentals to be billed.
      */
     public Bill(String name, String firstName, List<Rental> rentals) {
+
         super(name, firstName, rentals);
     }
     
