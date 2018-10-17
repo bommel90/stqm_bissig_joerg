@@ -2,14 +2,12 @@ package ch.fhnw.swc.mrs.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.Disabled;
 
 public class StatementTest {
     
@@ -30,44 +28,48 @@ public class StatementTest {
 
     @Test
     public void testStatement() {
-        Statement s1 = mock(Statement.class);
-        when(s1.getLastName()).thenReturn("Muster");
-        when(s1.getFirstName()).thenReturn("Hans");
-        when(s1.getRentals()).thenReturn(rentals);
-
-
-        assertEquals("Muster", s1.getLastName());
-        assertEquals("Hans", s1.getFirstName());
-        assertEquals(3, s1.getRentals().size());
+        s = new Statement("Muster", "Hans", rentals) {
+            @Override
+            public String print() {
+                return null;
+            }
+        };
+        assertEquals("Muster", s.getLastName());
+        assertEquals("Hans", s.getFirstName());
+        assertEquals(3, s.getRentals().size());
     }
 
-
-    @Disabled
-    @Test (expected=IllegalArgumentException.class)
+    @Test(expected=IllegalArgumentException.class)
     public void testFirstName() {
-        Statement s2 = mock(Statement.class);
-        when(s2.getLastName()).thenReturn("Muster");
-        when(s2.getFirstName()).thenReturn("Maximilian"); //länger als 8, wirft aber trotzdem keine IllegalArgumentException
-        when(s2.getRentals()).thenReturn(rentals);
+
+        new Statement("Muster", "Maximilian", rentals) {
+            @Override
+            public String print() {
+                return null;
+            }
+        };
     }
 
+    @Test(expected=IllegalArgumentException.class)
+    public void testLastName() {
 
-    @Disabled
-    @Test (expected=IllegalArgumentException.class)
-    public void testLastname() {
-        Statement s3 = mock(Statement.class);
-        when(s3.getLastName()).thenReturn("Mustermann"); //länger als 8, wirft aber trotzdem keine IllegalArgumentException
-        when(s3.getFirstName()).thenReturn("Hans");
-        when(s3.getRentals()).thenReturn(rentals);
+        new Statement("Mustermann", "Hans", rentals) {
+            @Override
+            public String print() {
+                return null;
+            }
+        };
     }
 
-    @Disabled
-    @Test (expected=IllegalArgumentException.class)
+    @Test(expected=IllegalArgumentException.class)
     public void testRentals() {
-        Statement s4 = mock(Statement.class);
-        when(s4.getLastName()).thenReturn("Muster");
-        when(s4.getFirstName()).thenReturn("Hans");
-        when(s4.getRentals()).thenReturn(null); //ist null, wirft aber trotzdem keine IllegalArgumentException
+
+        new Statement("Muster", "Hans", null) {
+            @Override
+            public String print() {
+                return null;
+            }
+        };
     }
 
 }
