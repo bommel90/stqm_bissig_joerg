@@ -41,7 +41,6 @@ public class StatementTest {
 
     @Test(expected=IllegalArgumentException.class)
     public void testFirstName() {
-
         new Statement("Muster", "Maximilian", rentals) {
             @Override
             public String print() {
@@ -52,24 +51,22 @@ public class StatementTest {
 
     @Test(expected=IllegalArgumentException.class)
     public void testLastName() {
-
-        new Statement("Mustermann", "Hans", rentals) {
-            @Override
-            public String print() {
-                return null;
-            }
-        };
+       new Statement("Mustermann", "Hans", rentals) {
+           @Override
+           public String print() {
+               return null;
+           }
+       };
     }
 
     @Test(expected=IllegalArgumentException.class)
     public void testRentals() {
-
-        new Statement("Muster", "Hans", null) {
-            @Override
-            public String print() {
-                return null;
-            }
-        };
+       new Statement("Muster", "Hans", null) {
+           @Override
+           public String print() {
+               return null;
+           }
+       };
     }
 
 }
